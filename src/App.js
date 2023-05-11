@@ -1,7 +1,6 @@
 import './css/App.css';
-import QuestionAnswer from './component/QuestionAnswer';
-import ExaminationRule from './component/ExaminationRule';
 import Menu from './component/Menu';
+import Content from './component/Content';
 import LoginForm from './component/LoginForm';
 
 function App() {
@@ -9,8 +8,7 @@ function App() {
     <>
       {/* <LoginForm /> */}
       <Menu />
-      <ExaminationRule/>
-      <QuestionAnswer />
+      <Content/>
     </>
   );
 }
