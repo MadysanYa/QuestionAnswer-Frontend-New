@@ -5,3 +5,7 @@ body {
 .bg-result {
   background: linear-gradient(90deg, rgb(31 49 147) 0%, rgb(11 25 102) 100%);
 }
+
+.bg-shinhan {
+  background-color: #0b1966;
+}

@@ -1,25 +1,19 @@
 import React, {useState } from 'react'
 import axios from 'axios';
-import Result from './Result';
 import { base_url } from '../BaseUrl';
+import { useNavigate  } from 'react-router-dom';
+import '../css/App.css';
 
 function FinishButton() {
     const [result, setResult] = useState(null);
-    // const [finish, setFinish] = useState(false);
-    // const history = useHistory();
-
-    const myStyle = {
-        backgroundColor: '#0b1966'
-    };
+    const navigate = useNavigate();
 
     // GET DETAIL RESULT BY USER
     async function getDetailResult(id) {
         await axios.get(base_url + "result", { params: { user_id: 2} })
         .then(response => {
-            console.log(response.data.data);
             setResult(response.data.data);
-            // setFinish(true);
-            // history.push(<Result />);
+            navigate('/result');
         })
         .catch(error => {
             console.log(error);
@@ -28,7 +22,7 @@ function FinishButton() {
 
     return (
         <div className="py-6 max-w-screen-lg mx-auto grid justify-items-end">
-           <button onClick={getDetailResult} className="cursor-pointer py-2 px-4 text-white text-center rounded" style={myStyle}>Finish Exam</button>
+           <button onClick={getDetailResult} className="cursor-pointer py-2 px-4 text-white text-center rounded bg-shinhan">Finish Exam</button>
         </div>
     )
 }

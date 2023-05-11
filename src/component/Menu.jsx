@@ -1,13 +1,10 @@
 import React from 'react'
+import '../css/App.css';
 import ShinhanLogo from '../image/shinhan-logo-white.svg';
 
 function Menu() {
-    const myStyle = {
-        backgroundColor: '#0b1966'
-    };
-
     return (
-        <div style={myStyle} className="sticky top-0">
+        <div className="sticky top-0 bg-shinhan">
             <div className="flex items-center justify-between flex-wrap py-6  max-w-screen-lg mx-auto">
                 <div className="flex items-center flex-shrink-0 text-white mr-6">
                     <img className="fill-current mr-2" width="40" src={ShinhanLogo} alt="" />

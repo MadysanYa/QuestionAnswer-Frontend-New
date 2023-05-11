@@ -1,14 +1,20 @@
 import './css/App.css';
-import Menu from './component/Menu';
 import Content from './component/Content';
 import LoginForm from './component/LoginForm';
+import Result from './component/Result';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <>
-      {/* <LoginForm /> */}
-      <Menu />
-      <Content/>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LoginForm />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/question" element={<Content/>} />
+          <Route path="/result" element={<Result/>} />
+        </Routes>
+      </Router>
     </>
   );
 }
