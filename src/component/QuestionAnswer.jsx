@@ -1,8 +1,10 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { base_url } from "../BaseUrl";
 import Loading from './Loading';
+import { useState, useEffect } from 'react';
+import { base_url } from "../BaseUrl";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function QuestionAnswer() {
     const [data, setData] = useState([]);
@@ -35,8 +37,12 @@ function QuestionAnswer() {
             "question_id": event.target.getAttribute('data-question-id'),
             "answer_id": event.target.value,
         }).then((response) => {
-            console.log(response.data.data);
-            
+            const resId = response.data.data.question_id;
+            const message = "You're successfully saved the answer for question " + resId;
+
+            toast.success(message, {
+                position: toast.POSITION.TOP_RIGHT
+            });
         }).catch((error) => {
             console.log(error);
         });
@@ -56,6 +62,7 @@ function QuestionAnswer() {
                                 {index + 1}. {question.question_text}
                             </p>
                         </div>
+                        <ToastContainer />
                         <div className="px-4 pt-4">
                             {question.answers.map((answer, i) => (
                                 <div className="flex items-center mb-1" key={answer.id}>
