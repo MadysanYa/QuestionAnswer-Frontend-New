@@ -2,6 +2,7 @@ import './css/App.css';
 import Content from './component/Content';
 import LoginForm from './component/LoginForm';
 import Result from './component/Result';
+import Examination from './component/Examination';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginForm />} />
           <Route path="/page/login" element={<LoginForm />} />
+          <Route path="/page/examination" element={<Examination/>} />
           <Route path="/page/question" element={<Content/>} />
           <Route path="/page/result" element={<Result/>} />
         </Routes>

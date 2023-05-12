@@ -4,7 +4,7 @@ import { base_url } from '../BaseUrl';
 import Menu from './Menu';
 import '../css/App.css';
 import Loading from './Loading';
-import NotFound from './NotFound';
+import PageNotFound from './PageNotFound';
 
 function Result() {
     const [data, setData] = useState();
@@ -30,7 +30,7 @@ function Result() {
         <>
             <Menu />
             {status === 404 ? (
-                <NotFound />
+                <PageNotFound />
             ) : (
                 data ? (
                     <div className="rounded overflow-hidden shadow-lg mt-4 max-w-screen-lg mx-auto">
