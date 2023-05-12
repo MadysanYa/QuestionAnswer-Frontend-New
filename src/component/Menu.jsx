@@ -1,13 +1,16 @@
 import React from 'react'
 import '../css/App.css';
 import ShinhanLogo from '../image/shinhan-logo-white.svg';
+import { Link } from 'react-router-dom';
 
 function Menu() {
     return (
         <div className="sticky top-0 bg-shinhan">
             <div className="flex items-center justify-between flex-wrap py-6  max-w-screen-lg mx-auto">
                 <div className="flex items-center flex-shrink-0 text-white mr-6">
-                    <img className="fill-current mr-2" width="40" src={ShinhanLogo} alt="" />
+                    <Link to="/page/examination">
+                        <img className="fill-current mr-2" width="40" src={ShinhanLogo} alt="" />
+                    </Link>
                     <span className="font-semibold text-xl tracking-tight">Shinhan Bank</span>
                 </div>
                 <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
