@@ -13,7 +13,7 @@ function FinishButton() {
 
     // GET DETAIL RESULT BY USER
     function getDetailResult(id) {
-        navigate(`/result?test_id=${testId}&user_id=${userJson.id}`);
+        navigate(`/result/user?test_id=${testId}&user_id=${userJson.id}`);
     }
 
     return (

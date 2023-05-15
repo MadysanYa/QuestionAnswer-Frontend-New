@@ -10,14 +10,15 @@ import 'react-toastify/dist/ReactToastify.css';
 function QuestionAnswer() {
     const [data, setData] = useState([]);
     const [status, setStatus] = useState(200);
+    const [isResult, setIsResult] = useState(false);
+
     const userInfo = localStorage.getItem("user_info");
     const userJson =  JSON.parse(userInfo);
+    const params = new URLSearchParams(window.location.search);
+    const testId = params.get('test_id');
 
     // GET ALL QUESTION AND ANSWER
     async function allQuestionAnswer() {
-        const params = new URLSearchParams(window.location.search);
-        const testId = params.get('test_id');
-
         await axios.get(base_url + "question", { params: { test_id: testId, user_id: userJson.id } })
             .then(response => {
                 setData(response.data.data);
@@ -28,6 +29,19 @@ function QuestionAnswer() {
             });
     }
 
+    // BLOCK USER WHO HAS RESULT
+    async function resultIsRead() {
+        await axios.get(base_url + "result/user", { params: { test_id: testId, user_id: userJson.id } })
+        .then(response => {
+            if (response.data.data) {
+                setIsResult(true);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }
+        
     // SAVE ANSWER
     const handleOptionChange = async (event) => {
         await axios.post(base_url + "user-answer", {
@@ -61,15 +75,16 @@ function QuestionAnswer() {
     }
 
     useEffect(() => {
+        resultIsRead();
         allQuestionAnswer();
     }, []);
 
     return (
         <>
-            {status === 404 ? (
+            {status === 404 || isResult === true ? (
                 <PageNotFound />
             ) : (
-                data.length > 1 ? (
+                data.length >= 1 ? (
                     <>
                         {data.map((question, index) => (
                             <div className="rounded overflow-hidden shadow-lg mt-4 p-6 bg-white max-w-screen-lg mx-auto" key={question.id}>

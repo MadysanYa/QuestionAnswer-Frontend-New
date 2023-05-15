@@ -35,7 +35,7 @@ function App() {
             </RouteProtect>
           } />
 
-          <Route path="/result" element={
+          <Route path="result/user" element={
             <RouteProtect>
               <Result />
             </RouteProtect>
