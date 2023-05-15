@@ -13,9 +13,10 @@ function Result() {
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const testId = params.get('test_id');
-        const userId = params.get('user_id');
+        const userInfo = localStorage.getItem("user_info");
+        const userJson =  JSON.parse(userInfo);
 
-        axios.get(base_url + "result/user", { params: { test_id: testId, user_id: userId } })
+        axios.get(base_url + "result/user", { params: { test_id: testId, user_id: userJson.id } })
             .then(response => {
                 setData(response.data.data);
 

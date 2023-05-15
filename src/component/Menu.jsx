@@ -8,6 +8,8 @@ function Menu() {
 
     const handleLogOut = () => {
         localStorage.removeItem("access_token");
+        localStorage.removeItem("user_info");
+
         navigate("/login");
     };
 

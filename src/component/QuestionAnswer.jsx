@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 function QuestionAnswer() {
     const [data, setData] = useState([]);
     const [status, setStatus] = useState(200);
+    const userInfo = localStorage.getItem("user_info");
+    const userJson =  JSON.parse(userInfo);
 
     // GET ALL QUESTION AND ANSWER
     async function allQuestionAnswer() {
@@ -73,7 +75,7 @@ function QuestionAnswer() {
                                                 value={answer.id}
                                                 data-question-id={question.id}
                                                 data-test-id={question.test_id}
-                                                data-user-id="1"
+                                                data-user-id={userJson.id}
                                                 className="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
                                                 onChange={handleOptionChange}
                                             />

@@ -18,8 +18,10 @@ function LoginForm() {
 
         }).then((response) => {
             navigate("/examination");
-            localStorage.setItem("user_info", response.data.user);
+            const userJson = JSON.stringify(response.data.user);
+
             localStorage.setItem("access_token", response.data.access_token);
+            localStorage.setItem("user_info", userJson);
             
         }).catch((error) => {
             console.log(error);
