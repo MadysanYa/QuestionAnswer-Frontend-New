@@ -1,19 +1,21 @@
 import React from 'react'
 import '../css/App.css';
 import ShinhanLogo from '../image/shinhan-logo-white.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Menu() {
+    const navigate = useNavigate();
+
     const handleLogOut = () => {
         localStorage.removeItem("access_token");
+        navigate("/login");
     };
-
 
     return (
         <div className="sticky top-0 bg-shinhan">
             <div className="flex items-center justify-between flex-wrap py-6  max-w-screen-lg mx-auto">
                 <div className="flex items-center flex-shrink-0 text-white mr-6">
-                    <Link to="/page/examination">
+                    <Link to="/examination">
                         <img className="fill-current mr-2" width="40" src={ShinhanLogo} alt="" />
                     </Link>
                     <span className="font-semibold text-xl tracking-tight">Shinhan Bank</span>

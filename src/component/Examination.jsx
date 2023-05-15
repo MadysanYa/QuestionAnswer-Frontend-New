@@ -32,7 +32,7 @@ function Examination() {
                     <div className="grid grid-cols-4 gap-4">
                         {data.length >= 1 ? (
                             data.map((exam, index) => (
-                                <Link to={`/page/question?test_id=${exam.id}`} key={exam.id}>
+                                <Link to={`/question?test_id=${exam.id}`} key={exam.id}>
                                     <div className="rounded overflow-hidden shadow-lg p-6 bg-white">
                                         <div className="text-center">
                                             <div className="">

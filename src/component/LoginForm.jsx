@@ -17,7 +17,7 @@ function LoginForm() {
             "password": password
 
         }).then((response) => {
-            navigate("/page/examination");
+            navigate("/examination");
             localStorage.setItem("user_info", response.data.user);
             localStorage.setItem("access_token", response.data.access_token);
             

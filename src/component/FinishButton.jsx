@@ -7,7 +7,7 @@ function FinishButton() {
 
     // GET DETAIL RESULT BY USER
     function getDetailResult(id) {
-        navigate('/page/result?test_id=1&user_id=1');
+        navigate('/result?test_id=1&user_id=1');
     }
 
     return (
