@@ -70,6 +70,11 @@ function QuestionAnswer() {
             // ADD THE 'CHECKED' ATTRIBUTE TO THE SELECTED RADIO BUTTON
             event.target.checked = true;
         }).catch((error) => {
+            // ALERT MESSAGE WHEN SAVE ANSWER FAILED
+            toast.warning("Sorry, Your page was expired.", {
+                position: toast.POSITION.TOP_RIGHT
+            });
+
             console.log(error);
         });
     }
