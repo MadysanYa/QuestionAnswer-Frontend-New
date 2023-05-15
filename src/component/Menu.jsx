@@ -4,6 +4,11 @@ import ShinhanLogo from '../image/shinhan-logo-white.svg';
 import { Link } from 'react-router-dom';
 
 function Menu() {
+    const handleLogOut = () => {
+        localStorage.removeItem("access_token");
+    };
+
+
     return (
         <div className="sticky top-0 bg-shinhan">
             <div className="flex items-center justify-between flex-wrap py-6  max-w-screen-lg mx-auto">
@@ -20,7 +25,7 @@ function Menu() {
                         </a> */}
                     </div>
                     <div>
-                        <button className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout</button>
+                        <button onClick={handleLogOut} className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout</button>
                     </div>
                 </div>
             </div>
