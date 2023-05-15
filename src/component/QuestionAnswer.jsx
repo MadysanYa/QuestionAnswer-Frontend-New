@@ -35,14 +35,26 @@ function QuestionAnswer() {
             "test_id": event.target.getAttribute('data-test-id'),
             "question_id": event.target.getAttribute('data-question-id'),
             "answer_id": event.target.value,
-
-        }).then((response) => {
-            // const resId = response.data.data.answer_id;
-            const message = "You're successfully saved the answer.";
             
+        }).then((response) => {
+            const message = "You're successfully saved the answer.";
+            const radioname =  event.target.name;
+            const radios = document.getElementsByName(radioname);
+            
+            // ALERT MESSAGE WHEN SAVE ANSWER SUCCESS
             toast.success(message, {
                 position: toast.POSITION.TOP_RIGHT
             });
+
+            // REMOVE ATTR FROM OTHER INPUT
+            for (let i = 0; i < radios.length; i++) {
+              if (radios[i] !== event.target) {
+                radios[i].removeAttribute('checked');
+              }
+            }
+          
+            // ADD THE 'CHECKED' ATTRIBUTE TO THE SELECTED RADIO BUTTON
+            event.target.checked = true;
         }).catch((error) => {
             console.log(error);
         });
@@ -79,7 +91,7 @@ function QuestionAnswer() {
                                                 data-user-id={userJson.id}
                                                 className="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
                                                 checked={answer.user_ticked}
-                                                onChange={handleOptionChange()}
+                                                onChange={handleOptionChange}
                                             />
                                             <label className="ml-2 text-gray-700">{answer.answer_text}</label>
                                         </div>
