@@ -18,7 +18,7 @@ function QuestionAnswer() {
         const params = new URLSearchParams(window.location.search);
         const testId = params.get('test_id');
 
-        await axios.get(base_url + "question", { params: { test_id: testId } })
+        await axios.get(base_url + "question", { params: { test_id: testId, user_id: userJson.id } })
             .then(response => {
                 setData(response.data.data);
             })
@@ -35,6 +35,7 @@ function QuestionAnswer() {
             "test_id": event.target.getAttribute('data-test-id'),
             "question_id": event.target.getAttribute('data-question-id'),
             "answer_id": event.target.value,
+
         }).then((response) => {
             // const resId = response.data.data.answer_id;
             const message = "You're successfully saved the answer.";
@@ -77,7 +78,8 @@ function QuestionAnswer() {
                                                 data-test-id={question.test_id}
                                                 data-user-id={userJson.id}
                                                 className="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-                                                onChange={handleOptionChange}
+                                                checked={answer.user_ticked}
+                                                onChange={handleOptionChange()}
                                             />
                                             <label className="ml-2 text-gray-700">{answer.answer_text}</label>
                                         </div>
