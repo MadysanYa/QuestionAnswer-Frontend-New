@@ -1,20 +1,52 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { base_url } from '../BaseUrl';
+import { useNavigate } from 'react-router-dom';
 import Loading from './Loading';
 
 function ExaminationRule() {
     const [data, setData] = useState(null);
     const [status, setStatus] = useState(200);
+    const [timeLeft, setTimeLeft] = useState();
+    const [isResult, setIsResult] = useState(false);
+
+    const navigate = useNavigate();
+    const params = new URLSearchParams(window.location.search);
+    const testId = params.get('test_id');
+    const userInfo = localStorage.getItem("user_info");
+    const userJson = JSON.parse(userInfo);
+
+    // BLOCK USER WHO HAS RESULT
+    async function resultIsRead() {
+        await axios.get(base_url + "result/check", { params: { test_id: testId, user_id: userJson.id } })
+            .then(response => {
+                if (response.data.data) {
+                    setIsResult(true);
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
+    // GET ALL QUESTION AND ANSWER
+    async function allQuestionAnswer() {
+        await axios.get(base_url + "question", { params: { test_id: testId, user_id: userJson.id } })
+            .then(response => {
+                console.log(response.data.data);
+            })
+            .catch(error => {
+                console.error(error);
+                setStatus(error.response.status);
+            });
+    }
 
     // GET DETAIL TEST TYPE
-    async function getDetailType() {
-        const params = new URLSearchParams(window.location.search);
-        const testId = params.get('test_id');
-
-        await axios.get(base_url + "test/" + testId)
+    async function getDetailExam() {
+        await axios.get(base_url + "test/" + testId, { params: { user_id: userJson.id } })
             .then(response => {
                 setData(response.data.data);
+                setTimeLeft(response.data.data.time_countdown);
             })
             .catch(error => {
                 console.log(error);
@@ -22,12 +54,46 @@ function ExaminationRule() {
             });
     }
 
+    // TIME COUNTDOWN 
     useEffect(() => {
-        getDetailType();
+        if (!isResult) {
+            if (timeLeft <= 0) {
+                navigate(`/result/user?test_id=${testId}&user_id=${userJson.id}`);
+            };
+
+            const intervalId = setInterval(() => {
+                setTimeLeft(timeLeft - 1);
+            }, 600);
+
+            return () => clearInterval(intervalId);
+        }
+    }, [timeLeft]);
+
+    useEffect(() => {
+        resultIsRead();
+        allQuestionAnswer();
+        getDetailExam();
     }, []);
 
     return (
         <>
+            {/* Time Countdown */}
+            {status === 404 || isResult === true ? (
+                <p></p>
+            ) : (
+                <div className="rounded overflow-hidden shadow-lg mt-4 p-6 bg-white w-36 fixed right-4">
+                    {data ? (
+                        <p className="font-semibold text-center">
+                            <span className="text-red-500 text-3xl">{timeLeft}</span>
+                            <br />
+                            <span className="">Minute</span>
+                        </p>
+                    ) : (
+                        <Loading />
+                    )}
+                </div>
+            )}
+
             {status === 200 ? (
                 <>
                     {/* Exam Date */}

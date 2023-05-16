@@ -11,27 +11,33 @@ function Examination() {
     const userInfo = localStorage.getItem("user_info");
     const userJson = JSON.parse(userInfo);
 
-    const handleClick = async (testId) => {
-        await axios.get(base_url + "result/user", { params: { test_id: testId, user_id: userJson.id } })
-            .then(response => {
-                console.log(response.data.data);
+    // CREATE RESULT WHEN USER START CLICK EXAM
+    const createResultWithoutScore = async (testId) => {
+        await axios.post(base_url + "result/create", {
+            "user_id": userJson.id,
+            "test_id": testId,
+        })
+        .then(response => {
+            console.log(response.data.data);
 
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }
+
+    // GET ALL EXAMINATION
+    async function allExamination() {
+        await axios.get(base_url + "test")
+            .then(response => {
+                setData(response.data.data);
             })
             .catch(error => {
-                console.error(error);
+                console.log(error);
             });
     }
 
     useEffect(() => {
-        async function allExamination() {
-            await axios.get(base_url + "test")
-                .then(response => {
-                    setData(response.data.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
         allExamination();
     }, []);
 
@@ -44,7 +50,7 @@ function Examination() {
                         {data.length >= 1 ? (
                             data.map((exam, index) => (
                                 <Link to={`/question?test_id=${exam.id}`} key={exam.id}>
-                                    <div className="rounded overflow-hidden shadow-lg p-6 bg-white" onClick={() => handleClick(exam.id)}>
+                                    <div className="rounded overflow-hidden shadow-lg p-6 bg-white" onClick={() => createResultWithoutScore(exam.id)}>
                                         <div className="text-center">
                                             <div className="">
                                                 <img className="fill-current m-auto" width="60" src={ExamLogo} alt="" />
