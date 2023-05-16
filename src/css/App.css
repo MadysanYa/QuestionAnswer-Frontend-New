@@ -9,3 +9,7 @@ body {
 .bg-shinhan {
   background-color: #0b1966;
 }
+
+.high-auto{
+  height: auto;
+}
