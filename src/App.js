@@ -11,7 +11,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={
+          <Route path="/" exact element={
             <RouteProtect>
               <LoginForm />
             </RouteProtect>

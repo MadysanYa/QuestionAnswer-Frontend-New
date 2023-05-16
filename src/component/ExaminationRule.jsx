@@ -63,7 +63,7 @@ function ExaminationRule() {
 
             const intervalId = setInterval(() => {
                 setTimeLeft(timeLeft - 1);
-            }, 600);
+            }, 60000);
 
             return () => clearInterval(intervalId);
         }
@@ -81,12 +81,14 @@ function ExaminationRule() {
             {status === 404 || isResult === true ? (
                 <p></p>
             ) : (
-                <div className="rounded overflow-hidden shadow-lg mt-4 p-6 bg-white w-36 fixed right-4">
+                <div className="rounded overflow-hidden shadow-lg mt-4 p-6 bg-white w-37 fixed right-4">
                     {data ? (
                         <p className="font-semibold text-center">
+                            <span>Remaining Time</span>
+                            <br />
                             <span className="text-red-500 text-3xl">{timeLeft}</span>
                             <br />
-                            <span className="">Minute</span>
+                            <span>Minute</span>
                         </p>
                     ) : (
                         <Loading />
