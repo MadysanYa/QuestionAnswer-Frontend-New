@@ -31,7 +31,7 @@ function QuestionAnswer() {
 
     // BLOCK USER WHO HAS RESULT
     async function resultIsRead() {
-        await axios.get(base_url + "result/check", { params: { test_id: testId, user_id: userJson.id } })
+        await axios.get(base_url + "result/exist-or-not", { params: { test_id: testId, user_id: userJson.id } })
         .then(response => {
             if (response.data.data) {
                 setIsResult(true);
