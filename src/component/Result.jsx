@@ -16,7 +16,12 @@ function Result() {
         const userInfo = localStorage.getItem("user_info");
         const userJson =  JSON.parse(userInfo);
 
-        axios.get(base_url + "result/user", { params: { test_id: testId, user_id: userJson.id } })
+        axios.get(base_url + "result/show-by-user", { 
+                params: { 
+                    test_id: testId, 
+                    user_id: userJson.id 
+                } 
+            })
             .then(response => {
                 setData(response.data.data);
 

@@ -58,7 +58,7 @@ function ExaminationRule() {
     useEffect(() => {
         if (!isResult) {
             if (timeLeft <= 0) {
-                navigate(`/result/user?test_id=${testId}&user_id=${userJson.id}`);
+                navigate(`/result?test_id=${testId}&user_id=${userJson.id}`);
             };
 
             const intervalId = setInterval(() => {

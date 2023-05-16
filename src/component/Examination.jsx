@@ -18,7 +18,7 @@ function Examination() {
             "test_id": testId,
         })
         .then(response => {
-            console.log(response.data.data);
+            console.log("Successfully Create Result Temp.");
 
         })
         .catch(error => {
@@ -31,6 +31,7 @@ function Examination() {
         await axios.get(base_url + "test")
             .then(response => {
                 setData(response.data.data);
+                console.log("Successfully Get All Examination.");
             })
             .catch(error => {
                 console.log(error);
