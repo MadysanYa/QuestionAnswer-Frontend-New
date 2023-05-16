@@ -8,8 +8,19 @@ import { Link } from 'react-router-dom';
 
 function Examination() {
     const [data, setData] = useState([]);
-    // const queryParams = { test_id: 'bar', user_id: 'qux' };
-    // const queryString = new URLSearchParams(queryParams).toString();
+    const userInfo = localStorage.getItem("user_info");
+    const userJson = JSON.parse(userInfo);
+
+    const handleClick = async (testId) => {
+        await axios.get(base_url + "result/user", { params: { test_id: testId, user_id: userJson.id } })
+            .then(response => {
+                console.log(response.data.data);
+
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
 
     useEffect(() => {
         async function allExamination() {
@@ -33,7 +44,7 @@ function Examination() {
                         {data.length >= 1 ? (
                             data.map((exam, index) => (
                                 <Link to={`/question?test_id=${exam.id}`} key={exam.id}>
-                                    <div className="rounded overflow-hidden shadow-lg p-6 bg-white">
+                                    <div className="rounded overflow-hidden shadow-lg p-6 bg-white" onClick={() => handleClick(exam.id)}>
                                         <div className="text-center">
                                             <div className="">
                                                 <img className="fill-current m-auto" width="60" src={ExamLogo} alt="" />
