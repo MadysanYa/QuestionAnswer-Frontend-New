@@ -81,19 +81,21 @@ function ExaminationRule() {
             {status === 404 || isResult === true ? (
                 <p></p>
             ) : (
-                <div className="rounded overflow-hidden shadow-lg mt-4 p-6 bg-white w-37 fixed right-4">
+                <>
                     {data ? (
-                        <p className="font-semibold text-center">
-                            <span>Remaining Time</span>
-                            <br />
-                            <span className="text-red-500 text-3xl">{timeLeft}</span>
-                            <br />
-                            <span>Minute</span>
-                        </p>
+                        <div className="rounded overflow-hidden shadow-lg mt-4 p-6 bg-white w-37 fixed right-4">
+                            <p className="font-semibold text-center">
+                                <span>Remaining Time</span>
+                                <br />
+                                <span className="text-red-500 text-3xl">{timeLeft}</span>
+                                <br />
+                                <span>Minute</span>
+                            </p>
+                        </div>
                     ) : (
-                        <Loading />
+                        <p></p>
                     )}
-                </div>
+                </>
             )}
 
             {status === 200 ? (
