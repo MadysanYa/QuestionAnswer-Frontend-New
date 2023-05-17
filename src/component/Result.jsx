@@ -55,7 +55,7 @@ function Result() {
                         <div>
                             <div className="text-center">
                                 <div className="p-6 ">
-                                    <p className="font-semibold">Time: <span className="font-normal">{data.time_taken}</span></p>
+                                    <p className="font-semibold">Time: <span className="font-normal">{data.time_taken} Minutes</span></p>
                                     <p className="font-semibold">User Name: <span className="font-normal">{data.user_id}</span></p>
                                     <p className="font-semibold">Examination Type: <span className="font-normal">{data.test_id}</span></p>
                                 </div>
