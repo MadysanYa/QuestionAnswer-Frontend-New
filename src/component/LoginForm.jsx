@@ -71,7 +71,7 @@ function LoginForm() {
                     <button type="submit" onClick={handleSubmit} className="cursor-pointer py-2 px-4 block mt-6 text-white font-bold w-full text-center rounded bg-shinhan">Login</button>
                 </form>
                 <p className="mt-4 text-center text-sm text-gray-500 font-semibold leading-6">
-                    <span className="text-red-600">NOTE: </span>Email & Password are the HR System.
+                    <span className="text-red-600">NOTE: </span>Username & Password are the same as with HR System.
                 </p>
             </div>
         </div>

@@ -4,12 +4,16 @@ import axios from 'axios'
 import Menu from './Menu';
 import ExamLogo from '../image/exam.png';
 import Loading from './Loading';
+import PageNotFound from './PageNotFound';
 import { Link } from 'react-router-dom';
 
 function Examination() {
     const [data, setData] = useState([]);
+    const [status, setStatus] = useState(200);
+
     const userInfo = localStorage.getItem("user_info");
     const userJson = JSON.parse(userInfo);
+    const messageNotFound = "Sorry, there's no examination right now!";
 
     // CREATE RESULT WHEN USER START CLICK EXAM
     const createResultWithoutScore = async (testId) => {
@@ -17,13 +21,13 @@ function Examination() {
             "user_id": userJson.id,
             "test_id": testId,
         })
-        .then(response => {
-            console.log("Successfully Create Result Temp.");
+            .then(response => {
+                console.log("Successfully Create Result Temp.");
 
-        })
-        .catch(error => {
-            console.error(error);
-        });
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }
 
     // GET ALL EXAMINATION
@@ -34,6 +38,7 @@ function Examination() {
                 console.log("Successfully Get All Examination.");
             })
             .catch(error => {
+                setStatus(error.response.status);
                 console.log(error);
             });
     }
@@ -45,34 +50,42 @@ function Examination() {
     return (
         <>
             <Menu />
-            <div className="mt-4 ">
-                <div className="max-w-screen-lg mx-auto">
-                    <div className="grid grid-cols-4 gap-4">
-                        {data.length >= 1 ? (
-                            data.map((exam, index) => (
-                                <Link to={`/question?test_id=${exam.id}`} key={exam.id}>
-                                    <div className="rounded overflow-hidden shadow-lg p-6 bg-white" onClick={() => createResultWithoutScore(exam.id)}>
-                                        <div className="text-center">
-                                            <div className="">
-                                                <img className="fill-current m-auto" width="60" src={ExamLogo} alt="" />
-                                            </div>
-                                            <div className="mt-4">
-                                                <p className="text-base uppercase">{exam.name}</p>
-                                                <p className="text-gray-400">{exam.date}</p>
-                                                <p className="text-gray-400 capitalize ">{exam.duration}</p>
+            {status === 404 ? (
+                <PageNotFound
+                    message={messageNotFound}
+                />
+            ) : (
+                <div className="mt-4 ">
+                    <div className="max-w-screen-lg mx-auto">
+                        <div className="grid grid-cols-4 gap-4">
+                            {data.length >= 1 ? (
+                                data.map((exam, index) => (
+                                    <Link to={`/question?test_id=${exam.id}`} key={exam.id}>
+                                        <div className="rounded overflow-hidden shadow-lg p-6 bg-white" onClick={() => createResultWithoutScore(exam.id)}>
+                                            <div className="text-center">
+                                                <div className="">
+                                                    <img className="fill-current m-auto" width="60" src={ExamLogo} alt="" />
+                                                </div>
+                                                <div className="mt-4">
+                                                    <p className="text-base uppercase">{exam.name}</p>
+                                                    <p className="text-gray-400">{exam.date}</p>
+                                                    <p className="text-gray-400 capitalize ">{exam.duration}</p>
+                                                    
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </Link>
-                            ))
-                        ) : (
-                            <div className="rounded overflow-hidden shadow-lg mt-4 p-6 bg-white">
-                                <Loading />
-                            </div>
-                        )}
+                                    </Link>
+                                ))
+                            ) : (
+                                <div className="rounded overflow-hidden shadow-lg mt-4 p-6 bg-white">
+                                    <Loading />
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
+
         </>
     )
 }
