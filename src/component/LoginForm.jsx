@@ -12,6 +12,7 @@ function LoginForm() {
     const [errorPassword, setErrorPassword] = useState(false);
 
     const navigate = useNavigate();
+    const inputClass = "w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none";
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -48,7 +49,7 @@ function LoginForm() {
                             name="user-name" 
                             id="user-name" 
                             placeholder="Username" 
-                            className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600"
+                            className={errorUsername ? inputClass + " invalid:border-red-600" : inputClass}
                             required
                             onChange={e => setUserName(e.target.value)}
                         />
@@ -61,7 +62,7 @@ function LoginForm() {
                             name="password" 
                             id="password" 
                             placeholder="Password" 
-                            className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600" 
+                            className={errorPassword ? inputClass + " invalid:border-red-600" : inputClass}
                             required
                             onChange={e => setPassword(e.target.value)}
                         />

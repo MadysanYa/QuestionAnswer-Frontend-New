@@ -48,8 +48,9 @@ function Result() {
                             </div>
                             <hr />
                             <div className="text-center px-4 pt-4">
-                                <div className="text-8xl font-light">{data.score}</div>
-                                <p className="mt-3 font-semibold">Score</p>
+                                <div className="text-8xl font-light">Done</div>
+                                {/* <div className="text-8xl font-light">{data.score}</div> */}
+                                {/* <p className="mt-3 font-semibold">Score</p> */}
                             </div>
                         </div>
                         <div>
